@@ -96,6 +96,21 @@
     .badge-early { background: var(--orange-dim); color: var(--orange); }
     .badge-down { background: var(--red-dim); color: var(--red); }
     .badge-offline { background: var(--gray-badge-dim); color: var(--gray-badge); }
+    .badge-suspended { background: rgba(100,100,100,0.15); color: #555; }
+    .badge-staff { background: rgba(139,105,20,0.15); color: var(--accent); }
+
+    /* Suspended card */
+    .card.suspended { opacity: 0.35; }
+    .card.suspended:hover { opacity: 0.55; }
+    .suspended-note { font-size: 0.65rem; color: #555; font-style: italic; margin-top: 0.35rem; }
+
+    /* Featured card */
+    .card.featured { border-color: var(--accent); }
+    .card.featured h3 { color: var(--accent); }
+
+    /* Staff section — hidden by default */
+    .staff-section { display: none; }
+    .staff-section.visible { display: block; }
 
     /* Buttons */
     .btn-primary {
@@ -181,12 +196,28 @@
 
   <main>
 
-    <!-- Live Projects -->
+    <!-- Client-Facing Live Projects -->
     <section>
       <h2 class="section-title">Live Projects</h2>
       <p class="section-desc">Production apps and tools currently serving clients.</p>
 
       <div class="card-grid">
+
+        <!-- Package Calculator (Featured) -->
+        <div class="card featured">
+          <div>
+            <h3>Package Calculator</h3>
+            <p class="desc">Session package pricing tool for clients and staff.</p>
+            <div class="badges">
+              <span class="badge badge-live">Live</span>
+            </div>
+          </div>
+          <div class="links">
+            <a href="https://calculator.fitclinic.io" target="_blank" class="btn-primary">Open Calculator &rarr;</a>
+            <a href="https://fitclinic-package-calculator.vercel.app" target="_blank" class="link-muted">Vercel fallback</a>
+            <a href="https://github.com/fitanon/fitclinic-package-calculator" target="_blank" class="link-muted">View Repository</a>
+          </div>
+        </div>
 
         <!-- Artifit -->
         <div class="card">
@@ -231,21 +262,6 @@
           </div>
         </div>
 
-        <!-- Package Calculator -->
-        <div class="card">
-          <div>
-            <h3>Package Calculator</h3>
-            <p class="desc">Session package pricing tool for clients and staff.</p>
-            <div class="badges">
-              <span class="badge badge-live">Live</span>
-            </div>
-          </div>
-          <div class="links">
-            <a href="https://fitclinic-package-calculator.vercel.app" target="_blank" class="btn-primary">Visit Site &rarr;</a>
-            <a href="https://github.com/fitanon/fitclinic-package-calculator" target="_blank" class="link-muted">View Repository</a>
-          </div>
-        </div>
-
         <!-- FitClinic Landing (Webflow) -->
         <div class="card">
           <div>
@@ -263,9 +279,61 @@
       </div>
     </section>
 
-    <!-- In Development -->
-    <section>
-      <h2 class="section-title">In Development</h2>
+    <!-- Staff-Facing Projects (hidden until passcode) -->
+    <section class="staff-section" id="staffSection">
+
+      <h2 class="section-title">Staff &amp; Internal Projects</h2>
+      <p class="section-desc">Internal tools and staff-facing applications.</p>
+
+      <div class="card-grid">
+
+        <!-- Staff Portal -->
+        <div class="card">
+          <div>
+            <h3>Staff Portal</h3>
+            <p class="desc">Staff dashboard with session management, client tracking, and Stripe payments.</p>
+            <div class="badges">
+              <span class="badge badge-live">Live</span>
+              <span class="badge badge-staff">Staff</span>
+            </div>
+          </div>
+          <div class="links">
+            <a href="https://portal.fitclinic.io" target="_blank" class="btn-primary">Open Staff Portal &rarr;</a>
+            <a href="https://github.com/fitanon/fitclinic" target="_blank" class="link-muted">View Repository</a>
+          </div>
+        </div>
+
+        <!-- Database Sync -->
+        <div class="card">
+          <div>
+            <h3>Database Sync</h3>
+            <p class="desc">Notion &amp; Square database sync service.</p>
+            <div class="badges">
+              <span class="badge badge-live">Live</span>
+              <span class="badge badge-staff">Staff</span>
+            </div>
+          </div>
+          <div class="links">
+            <a href="https://fitclinic-database-sync-fitclinic.vercel.app" target="_blank" class="btn-primary">Open Dashboard &rarr;</a>
+          </div>
+        </div>
+
+        <!-- FitClinic Coming Soon (Suspended) -->
+        <div class="card suspended">
+          <div>
+            <h3>FitClinic Coming Soon</h3>
+            <p class="desc">Placeholder landing page (Vercel).</p>
+            <div class="badges">
+              <span class="badge badge-suspended">Suspended</span>
+            </div>
+            <p class="suspended-note">Domain fitclinic.io being redirected to Client Portal</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- In Development -->
+      <h2 class="section-title" style="margin-top:1rem">In Development</h2>
       <p class="section-desc">Active projects in various stages of completion.</p>
 
       <div class="table-wrap">
@@ -283,20 +351,6 @@
 
             <tr>
               <td>
-                <p class="name">FitClinic Portal</p>
-                <p class="sub">Client portal v1 &mdash; React / Vite / Tailwind</p>
-              </td>
-              <td><span class="badge badge-dev">50-75%</span></td>
-              <td><span class="badge badge-live">Live</span></td>
-              <td class="est">2-3 weeks</td>
-              <td class="td-links">
-                <a href="https://fitclinic-portal-fitclinic.vercel.app" target="_blank" class="btn-sm">Visit &rarr;</a>
-                <a href="https://github.com/fitanon/fitclinic" target="_blank" class="link-muted" style="margin-left:0.5rem">Repo</a>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
                 <p class="name">FitClinic Portal 2</p>
                 <p class="sub">Client portal v2 &mdash; enhanced features</p>
               </td>
@@ -305,20 +359,6 @@
               <td class="est">2-3 weeks</td>
               <td class="td-links">
                 <a href="https://github.com/fitanon/fitclinic" target="_blank" class="link-muted">Repo</a>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <p class="name">Database Sync</p>
-                <p class="sub">Notion &amp; Square database sync service</p>
-              </td>
-              <td><span class="badge badge-early">25-50%</span></td>
-              <td><span class="badge badge-live">Live</span></td>
-              <td class="est">1-2 months</td>
-              <td class="td-links">
-                <a href="https://fitclinic-database-sync-fitclinic.vercel.app" target="_blank" class="btn-sm">Visit &rarr;</a>
-                <a href="https://github.com/fitanon/fitclinic" target="_blank" class="link-muted" style="margin-left:0.5rem">Repo</a>
               </td>
             </tr>
 
@@ -348,6 +388,19 @@
               </td>
             </tr>
 
+            <tr>
+              <td>
+                <p class="name">Vibe Coding Platform</p>
+                <p class="sub">Interactive coding platform</p>
+              </td>
+              <td><span class="badge badge-early">25-50%</span></td>
+              <td><span class="badge badge-offline">Not Live</span></td>
+              <td class="est">TBD</td>
+              <td class="td-links">
+                <a href="https://github.com/fitanon/vibe-coding-platform" target="_blank" class="link-muted">Repo</a>
+              </td>
+            </tr>
+
           </tbody>
         </table>
       </div>
@@ -361,6 +414,24 @@
       <a href="https://github.com/fitanon" target="_blank">github.com/fitanon</a>
     </div>
   </footer>
+
+  <script>
+    // Passcode gate: type "admin" anywhere on the page to reveal staff section
+    (function() {
+      var buffer = '';
+      var code = 'admin';
+      document.addEventListener('keydown', function(e) {
+        buffer += e.key.toLowerCase();
+        if (buffer.length > code.length) buffer = buffer.slice(-code.length);
+        if (buffer === code) {
+          var section = document.getElementById('staffSection');
+          var isVisible = section.classList.contains('visible');
+          section.classList.toggle('visible');
+          buffer = '';
+        }
+      });
+    })();
+  </script>
 
 </body>
 </html>
