@@ -1,0 +1,17 @@
+{
+  "name": "fitanon.github.io",
+  "install": "python3 --version",
+  "terminals": [
+    {
+      "name": "static-server",
+      "command": "python3 -m http.server 8000 --bind 0.0.0.0",
+      "description": "Serves the static GitHub Pages site at http://localhost:8000"
+    }
+  ],
+  "ports": [
+    {
+      "name": "Static site",
+      "port": 8000
+    }
+  ]
+}
