@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client QR Codes | The Fit Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-card: #141414;
+      --border: #222;
+      --text-primary: #f0ebe3;
+      --text-secondary: #a39e93;
+      --text-muted: #5c5850;
+      --accent: #c9a96e;
+    }
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    h1, h2 { font-family: "Gilda Display", Georgia, serif; font-weight: 400; }
+    .wrap { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+    .logo {
+      width: 3rem; height: 3rem;
+      background: linear-gradient(135deg, var(--accent), #8b6914);
+      border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Gilda Display", serif; font-size: 1.35rem; color: #0a0a0a;
+    }
+    h1 { font-size: 1.75rem; margin-top: 1.25rem; }
+    .lede { color: var(--text-secondary); margin-top: 0.6rem; font-size: 0.9rem; }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.35rem 1.4rem;
+      margin-top: 1.25rem;
+    }
+    .card h2 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+    ol { padding-left: 1.2rem; color: var(--text-secondary); font-size: 0.9rem; }
+    ol li + li { margin-top: 0.45rem; }
+    .bookmarklet {
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-top: 1rem;
+      padding: 0.7rem 1.2rem;
+      background: linear-gradient(135deg, var(--accent), #a3832a);
+      color: #0a0a0a; font-size: 0.85rem; font-weight: 600;
+      border-radius: 0.6rem; text-decoration: none; cursor: grab;
+    }
+    .hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.7rem; }
+    .links { display: flex; flex-direction: column; gap: 0.45rem; margin-top: 0.85rem; }
+    .links a { color: var(--accent); font-size: 0.85rem; text-decoration: none; }
+    .links a:hover { text-decoration: underline; }
+    .back { display: inline-block; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.8rem; text-decoration: none; }
+    .back:hover { color: var(--text-secondary); }
+    code { font-family: ui-monospace, Menlo, monospace; font-size: 0.8em; color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">F</div>
+    <h1>Client QR codes</h1>
+    <p class="lede">Show or print the check-in QR for each client from the staff portal, without signing in as that client.</p>
+
+    <section class="card">
+      <h2>Add QR actions to Admin → Clients</h2>
+      <ol>
+        <li>Drag the gold button below onto your bookmarks bar.</li>
+        <li>Open the staff portal and sign in with the admin PIN.</li>
+        <li>Go to the <strong>Clients</strong> tab.</li>
+        <li>Click the bookmark. A panel lists every client with <strong>Show</strong> and <strong>Print</strong>.</li>
+      </ol>
+      <a id="bookmarklet" class="bookmarklet" href="#">Staff QR — Clients</a>
+      <p class="hint">Chrome / Edge: show the bookmarks bar with Ctrl/Cmd + Shift + B, then drag. Clicking the button on this page will copy the bookmarklet and open admin.</p>
+    </section>
+
+    <section class="card">
+      <h2>One client at a time</h2>
+      <p class="lede" style="margin:0">If you only have a login code, the portal can generate that client’s QR without checking them in.</p>
+      <div class="links">
+        <a href="https://portal.fitclinic.io/#/qr-generator" target="_blank" rel="noopener">Open QR generator →</a>
+        <a href="https://portal.fitclinic.io/#/admin" target="_blank" rel="noopener">Open Admin dashboard →</a>
+        <a href="https://portal.fitclinic.io/#/scanner" target="_blank" rel="noopener">Open staff scanner →</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>How the QR works</h2>
+      <p class="lede" style="margin:0">Each client has a saved <code>qrToken</code>. The QR encodes:</p>
+      <p class="hint" style="margin-top:0.75rem"><code>https://portal.fitclinic.io/#/checkin?qr=&lt;token&gt;</code></p>
+      <p class="lede" style="margin-top:0.75rem">The front-desk scanner reads that token and posts it to <code>/api/checkin</code>. Generating or printing a QR does not use a session.</p>
+    </section>
+
+    <a class="back" href="./">← Back to project hub</a>
+  </div>
+  <script>
+    (function () {
+      var scriptUrl = new URL("staff-qr-admin.js", window.location.href).href;
+      var code = "void(function(){var h=location.hostname;if(!/fitclinic\\.io$/i.test(h)&&h!=='localhost'&&h!=='127.0.0.1'){alert('Open the Staff Portal admin page first.');location.href='https://portal.fitclinic.io/#/admin';return;}var s=document.createElement('script');s.src='" + scriptUrl + "?t='+Date.now();document.documentElement.appendChild(s);}())";
+      var bookmark = document.getElementById("bookmarklet");
+      bookmark.setAttribute("href", "javascript:" + code);
+      bookmark.addEventListener("click", function (event) {
+        if (event.metaKey || event.ctrlKey) return;
+        event.preventDefault();
+        var text = "javascript:" + code;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).catch(function () {});
+        }
+        window.open("https://portal.fitclinic.io/#/admin", "_blank", "noopener");
+        alert("Bookmarklet copied. After admin sign-in, paste it into the address bar or drag this gold button to your bookmarks bar, then click it on the Clients tab.");
+      });
+    })();
+  </script>
+</body>
+</html>
