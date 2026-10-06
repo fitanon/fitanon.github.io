@@ -166,6 +166,8 @@
       "#" + TOOL_ID + " .tfc-empty{padding:18px 12px;text-align:center;font-size:12px;color:#a39e93;}" +
       "#" + TOOL_ID + " .tfc-fab{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#c9a96e,#a3832a);color:#0a0a0a;font-weight:700;font-size:14px;box-shadow:0 10px 24px rgba(0,0,0,.35);}" +
       "#" + TOOL_ID + " .tfc-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;}" +
+      "#" + TOOL_ID + " .tfc-modal[hidden]{display:none !important;}" +
+      "#" + TOOL_ID + " [hidden]{display:none !important;}" +
       "#" + TOOL_ID + " .tfc-dialog{width:min(360px,100%);background:#141414;border:1px solid #333;border-radius:16px;padding:20px;text-align:center;}" +
       "#" + TOOL_ID + " .tfc-dialog img{width:220px;height:220px;background:#fff;border-radius:12px;padding:10px;}" +
       "#" + TOOL_ID + " .tfc-dialog h3{margin:12px 0 4px;font-size:16px;}" +
